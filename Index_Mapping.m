@@ -16,8 +16,8 @@ for d=0:(M-1)
         array_binary = kbits(N,k);
         for j = 1:length(array_binary)
             index_array(i) = d* 2^(N+lv) + k*2^N + array_binary(j);
-            disp(sprintf('index %d',i));
-            disp(value2state(M,N,index_array(i)));
+%             disp(sprintf('index %d',i));
+%             disp(value2state(M,N,index_array(i)));
             i = i+ 1;
         end
     end

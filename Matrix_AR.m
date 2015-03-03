@@ -57,24 +57,19 @@ function [ A,R ] = Matrix_AR( M,N,lambda,lambda0 )
 
        % lose 1 message
  
-            for j = 1:(length(position1)-1)
-                for k = (j+1):length(position1)
-                    new_state = state;
-                    new_state(1) = d+1;
-                    new_state(position1(j)+1)=0;
-
-                    new_value = state2value(M,new_state);
-
-                    new_index = Index_Searching(new_value,index_array);
-                    rate(i,new_index) = lambda(position1(j),position1(k))/2;
-
-                    new_state = state;
-                    new_state(1) = d+1;
-                    new_state(position1(k)+1)=0;
-                    new_value = state2value(M,new_state);
-                    new_index = Index_Searching(new_value,index_array);
-                    rate(i,new_index) = lambda(position1(j),position1(k))/2;
+            for j = 1:length(position1)
+                sum_lambda = 0;
+                for k = 1:length(position1)
+                    if (k ~=j)
+                        sum_lambda = sum_lambda + lambda(position1(j),position1(k));
+                    end
                 end
+                new_state = state; 
+                new_state(1) = d+1;
+                new_state(position1(j)+1) = 0;
+                new_value = state2value(M,new_state);
+                new_index = Index_Searching(new_value,index_array);
+                rate(i,new_index) = sum_lambda/2;              
             end
 
        end

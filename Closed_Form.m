@@ -1,17 +1,27 @@
 
 
-% M = 2:9; 
-% N = 10;
-M = [2:3];
-N = 4;
+M = 2:9; 
+N = 10;
+% M = [2:4];
+% N = 5;
 
 num_drops = [];
 drops_ratio = [];
 
-%     lambda = rand(N);
-%     lambda0 = rand(1,N);
-lambda = ones(N);
-lambda0 = ones(1,N);
+rng(1);
+lambda = rand(N);
+rng(1);
+lambda0 = rand(1,N);
+for i = 1:N
+    lambda(i,i) = 0;
+end
+for i = 1:N-1
+    for j = 2:N
+        lambda(j,i) = lambda(i,j);
+    end
+end
+% lambda = ones(N);
+% lambda0 = ones(1,N);
 
 for c = 1:length(M)
 
